@@ -1,4 +1,4 @@
-import { BiCurrentLocation } from "react-icons/bi";
+import { IoLocationSharp } from "react-icons/io5";
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
 
@@ -8,7 +8,6 @@ const Header = ({ locationName, country }) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #3b3c3a;
   `;
   const textStyle = css`
     font-size: 20px;
@@ -17,6 +16,7 @@ const Header = ({ locationName, country }) => {
   const iconStyle = css`
     font-size: 24px;
     margin-right: 0.3rem;
+    color: #3b3c3a;
   `;
   const containerStyle = css`
     display: flex;
@@ -28,7 +28,7 @@ const Header = ({ locationName, country }) => {
     <header css={headerStyle}>
       <span css={textStyle}>{country}</span>
       <div css={containerStyle}>
-        <BiCurrentLocation css={iconStyle} />
+        <IoLocationSharp css={iconStyle} />
         <h1 css={textStyle}>{locationName}</h1>
       </div>
       <span css={textStyle}>°C</span>
