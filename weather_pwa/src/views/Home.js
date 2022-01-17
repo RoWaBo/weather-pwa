@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { css } from "@emotion/react";
 import LoadingSpinner from "../components/LoadingSpinner";
+import PopupBox from "../components/PopupBox";
 /** @jsxImportSource @emotion/react */
 
 const Home = () => {
@@ -36,13 +37,15 @@ const Home = () => {
     })();
   }, []);
 
-  return weatherData ? (
-    <>
-      <h1>this is home</h1>
-    </>
-  ) : (
-    <LoadingSpinner />
-  );
+  if (weatherData)
+    return (
+      <>
+        <h1>this is home</h1>
+      </>
+    );
+  if (!weatherData && !locationNotAllowed) return <LoadingSpinner />;
+  if (locationNotAllowed)
+    return <PopupBox message="Please allow this site to use your location" />;
 };
 
 export default Home;
