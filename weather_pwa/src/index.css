@@ -5,7 +5,8 @@ body {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #fdf6e6;
+  /* background: #fdf6e6; */
+  background: #ded2d7;
 }
 
 code {
@@ -30,4 +31,17 @@ a {
 }
 ul {
   list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+  color: #3b3c3a;
+}
+
+p,
+span {
+  color: #3b3c3a;
 }
