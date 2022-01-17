@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import PopupBox from "../components/PopupBox";
 import Header from "../components/Header";
+import CurrentWeather from "../components/CurrentWeather";
 /** @jsxImportSource @emotion/react */
 
 const Home = () => {
@@ -47,6 +48,12 @@ const Home = () => {
         <Header
           locationName={weather.current.name}
           country={weather.current.sys.country}
+        />
+        <CurrentWeather
+          unixTimestamp={weather.current.dt}
+          description={weather.current.weather[0].description}
+          temp={weather.current.main.temp}
+          icon={weather.current.weather[0].icon}
         />
       </>
     );
