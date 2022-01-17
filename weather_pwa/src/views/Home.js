@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { css } from "@emotion/react";
+import LoadingSpinner from "../components/LoadingSpinner";
+/** @jsxImportSource @emotion/react */
 
 const Home = () => {
   "geolocation" in navigator
@@ -33,10 +36,12 @@ const Home = () => {
     })();
   }, []);
 
-  return (
+  return weatherData ? (
     <>
       <h1>this is home</h1>
     </>
+  ) : (
+    <LoadingSpinner />
   );
 };
 
