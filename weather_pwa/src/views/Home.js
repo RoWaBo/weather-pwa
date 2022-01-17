@@ -11,7 +11,7 @@ const Home = () => {
     ? console.log("available")
     : console.log("unavailable");
 
-  const [weatherData, setWeatherData] = useState();
+  const [weather, setWeather] = useState();
   const [locationNotAllowed, setLocationNotAllowed] = useState(false);
 
   useEffect(() => {
@@ -29,22 +29,28 @@ const Home = () => {
           const lon = position.coords.longitude;
           const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
 
-          const { data } = await axios(
-            `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
+          const { data: forecast } = await axios(
+            `https://api.openweathermap.org/data/2.5/onecall?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`
           );
-          setWeatherData(data);
+          const { data: current } = await axios(
+            `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`
+          );
+          setWeather({ forecast, current });
         });
       }
     })();
   }, []);
 
-  if (weatherData)
+  if (weather)
     return (
       <>
-        <Header title="Current Location" />
+        <Header
+          locationName={weather.current.name}
+          country={weather.current.sys.country}
+        />
       </>
     );
-  if (!weatherData && !locationNotAllowed) return <LoadingSpinner />;
+  if (!weather && !locationNotAllowed) return <LoadingSpinner />;
   if (locationNotAllowed)
     return <PopupBox message="Please allow this site to use your location" />;
 };
