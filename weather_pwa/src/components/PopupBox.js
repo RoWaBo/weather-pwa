@@ -1,10 +1,11 @@
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
+import { MdOutlineLocationOff } from "react-icons/md";
 
 const PopupBox = ({ message }) => {
   const overlay = css`
     position: fixed;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
     top: 0;
     left: 0;
     width: 100%;
@@ -20,18 +21,30 @@ const PopupBox = ({ message }) => {
     width: 80%;
     height: 50%;
     background-color: white;
+    padding: 1rem;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     border-radius: 20px;
   `;
 
+  const textStyle = css`
+    font-size: 20px;
+    font-weight: 500;
+  `;
+  const iconStyle = css`
+    font-size: 60px;
+    margin-bottom: 2rem;
+  `;
+
   return (
     <div css={overlay}>
       <div css={popup}>
-        <h1>{message}</h1>
+        <MdOutlineLocationOff css={iconStyle} />
+        <h1 css={textStyle}>{message}</h1>
       </div>
     </div>
   );
