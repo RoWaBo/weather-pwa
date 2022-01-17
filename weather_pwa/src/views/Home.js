@@ -3,6 +3,7 @@ import axios from "axios";
 import { css } from "@emotion/react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import PopupBox from "../components/PopupBox";
+import Header from "../components/Header";
 /** @jsxImportSource @emotion/react */
 
 const Home = () => {
@@ -40,7 +41,7 @@ const Home = () => {
   if (weatherData)
     return (
       <>
-        <h1>this is home</h1>
+        <Header title="Current Location" />
       </>
     );
   if (!weatherData && !locationNotAllowed) return <LoadingSpinner />;
