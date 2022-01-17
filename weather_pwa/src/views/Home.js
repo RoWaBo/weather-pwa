@@ -11,7 +11,7 @@ const Home = () => {
     : console.log("unavailable");
 
   const [weatherData, setWeatherData] = useState();
-  const [locationNotAllowed, setLocationNotAllowed] = useState();
+  const [locationNotAllowed, setLocationNotAllowed] = useState(false);
 
   useEffect(() => {
     (async () => {
