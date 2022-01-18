@@ -5,6 +5,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import PopupBox from "../components/PopupBox";
 import Header from "../components/Header";
 import CurrentWeather from "../components/CurrentWeather";
+import ForecastList from "../components/Forecast";
 /** @jsxImportSource @emotion/react */
 
 const Home = () => {
@@ -55,6 +56,7 @@ const Home = () => {
           temp={weather.current.main.temp}
           icon={weather.current.weather[0].icon}
         />
+        <ForecastList forecastArray={weather.forecast.daily} />
       </>
     );
   if (!weather && !locationNotAllowed) return <LoadingSpinner />;
