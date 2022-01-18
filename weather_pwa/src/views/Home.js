@@ -8,10 +8,6 @@ import CurrentWeather from "../components/CurrentWeather";
 /** @jsxImportSource @emotion/react */
 
 const Home = () => {
-  "geolocation" in navigator
-    ? console.log("available")
-    : console.log("unavailable");
-
   const [weather, setWeather] = useState();
   const [locationNotAllowed, setLocationNotAllowed] = useState(false);
 
@@ -26,17 +22,21 @@ const Home = () => {
       // Fetch current position OpenWeatherMap data
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(async (position) => {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-          const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
+          try {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
 
-          const { data: forecast } = await axios(
-            `https://api.openweathermap.org/data/2.5/onecall?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`
-          );
-          const { data: current } = await axios(
-            `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`
-          );
-          setWeather({ forecast, current });
+            const { data: forecast } = await axios(
+              `https://api.openweathermap.org/data/2.5/onecall?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`
+            );
+            const { data: current } = await axios(
+              `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`
+            );
+            setWeather({ forecast, current });
+          } catch (err) {
+            alert("Fetching from open weather map went wrong - " + err);
+          }
         });
       }
     })();
