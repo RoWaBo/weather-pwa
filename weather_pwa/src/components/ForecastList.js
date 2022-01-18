@@ -15,14 +15,6 @@ const ForecastList = ({ forecastArray }) => {
     font-weight: 500;
     flex: 1;
   `;
-  const iconStyle = css`
-    flex: 1;
-    max-width: 24px;
-
-    & > img {
-      color: #3b3c3a;
-    }
-  `;
   const tempContainerStyle = css`
     flex: 1;
     display: flex;
@@ -51,12 +43,17 @@ const ForecastList = ({ forecastArray }) => {
                   weekday: "long",
                 })}
               </h2>
-              <div css={iconStyle}>
-                <img
-                  src={`./weatherIcons/${forecast.weather[0].icon}.svg`}
-                  alt="weather icon"
-                />
-              </div>
+              <div
+                css={css`
+                  flex: 1;
+                  mask: url(${`./weatherIcons/${forecast.weather[0].icon}.svg`})
+                    no-repeat center;
+                  width: 20px;
+                  height: 20px;
+                  mask-size: contain;
+                  background: #3b3c3a;
+                `}
+              ></div>
               <div css={tempContainerStyle}>
                 <span css={maxTempStyle}>
                   {forecast.temp.max.toString().split(".")[0] + "°"}
