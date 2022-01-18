@@ -12,7 +12,7 @@ function App() {
       <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="search" element={<Search />} />
+          <Route path="search/:cityName" element={<Search />} />
           <Route path="favorites" element={<Favorites />} />
         </Routes>
       </MainLayout>

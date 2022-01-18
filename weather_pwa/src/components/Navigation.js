@@ -45,7 +45,7 @@ const Navigation = () => {
           </Link>
         </li>
         <li css={itemStyle}>
-          <Link to="/search" css={linkStyle}>
+          <Link to="/search/searching" css={linkStyle}>
             <IoMdSearch />
           </Link>
         </li>
