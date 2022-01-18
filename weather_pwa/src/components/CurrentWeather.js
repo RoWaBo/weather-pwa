@@ -10,7 +10,7 @@ const CurrentWeather = ({ unixTimestamp, description, temp, icon }) => {
   const day = date.toLocaleString("en-US", { weekday: "long" });
   const tempNoDecimals = temp.toString().split(".")[0];
 
-  const mainStyle = css`
+  const containerStyle = css`
     margin: 2rem auto;
     display: flex;
     flex-direction: column;
@@ -26,7 +26,7 @@ const CurrentWeather = ({ unixTimestamp, description, temp, icon }) => {
     color: #3b3c3a;
   `;
   const passiveTimeStyle = css`
-    color: #aaa3b2;
+    color: rgba(59, 60, 58, 0.5);
   `;
   const timeContainerStyle = css`
     width: 100%;
@@ -44,14 +44,9 @@ const CurrentWeather = ({ unixTimestamp, description, temp, icon }) => {
     margin-bottom: 0.5rem;
     text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.1);
   `;
-  const iconStyle = css`
-    margin-top: -233px;
-    z-index: -1;
-    opacity: 0.5;
-  `;
 
   return (
-    <main css={mainStyle}>
+    <div css={containerStyle}>
       <div css={timeContainerStyle}>
         <span css={passiveTimeStyle}>{oneHourBehind}</span>
         <span css={activeTimeStyle}>{currentTime}</span>
@@ -61,13 +56,19 @@ const CurrentWeather = ({ unixTimestamp, description, temp, icon }) => {
         {day}, {description}
       </h2>
       <span css={tempStyle}>{tempNoDecimals}</span>
-      <img
-        css={iconStyle}
-        src={`./weatherIcons/${icon}.svg`}
-        // src={`./weatherIcons/01d.svg`}
-        alt={`${description} weather icon`}
-      />
-    </main>
+      <div
+        css={css`
+          mask: url(${`./weatherIcons/${icon}.svg`}) no-repeat center;
+          width: 360px;
+          height: 360px;
+          mask-size: contain;
+          background: #fff;
+          margin-top: -233px;
+          z-index: -1;
+          opacity: 0.6;
+        `}
+      ></div>
+    </div>
   );
 };
 
