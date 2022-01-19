@@ -11,7 +11,7 @@ const CurrentWeather = ({ unixTimestamp, description, temp, icon }) => {
   const tempNoDecimals = temp.toString().split(".")[0];
 
   const containerStyle = css`
-    margin: 2rem auto;
+    margin: 1rem auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,6 +59,7 @@ const CurrentWeather = ({ unixTimestamp, description, temp, icon }) => {
       <div
         css={css`
           mask: url(${`./weatherIcons/${icon}.svg`}) no-repeat center;
+          /* mask: url(${`./weatherIcons/01d.svg`}) no-repeat center; */
           width: 360px;
           height: 360px;
           mask-size: contain;

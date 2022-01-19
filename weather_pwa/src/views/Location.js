@@ -37,7 +37,7 @@ const Location = () => {
         setErrorMessage("The city could not be found");
       }
     })();
-  }, []);
+  }, [cityName]);
 
   // === STYLE ===
   const errorMessageStyle = css`

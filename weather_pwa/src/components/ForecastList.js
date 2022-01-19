@@ -34,10 +34,10 @@ const ForecastList = ({ forecastArray }) => {
     font-weight: 500;
   `;
   const maxTempStyle = css`
-    width: 1.9rem;
+    width: 2.2rem;
   `;
   const minTempStyle = css`
-    width: 1.9rem;
+    width: 2.2rem;
     text-align: end;
     color: rgba(59, 60, 58, 0.5);
   `;

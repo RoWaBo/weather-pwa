@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { css } from "@emotion/react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import PopupBox from "../components/PopupBox";
 import Header from "../components/Header";
 import CurrentWeather from "../components/CurrentWeather";
-import ForecastList from "../components/Forecast";
-/** @jsxImportSource @emotion/react */
+import ForecastList from "../components/ForecastList";
 
 const Home = () => {
   const [weather, setWeather] = useState();
@@ -45,7 +43,7 @@ const Home = () => {
 
   if (weather)
     return (
-      <>
+      <main>
         <Header
           locationName={weather.current.name}
           country={weather.current.sys.country}
@@ -57,7 +55,7 @@ const Home = () => {
           icon={weather.current.weather[0].icon}
         />
         <ForecastList forecastArray={weather.forecast.daily} />
-      </>
+      </main>
     );
   if (!weather && !locationNotAllowed) return <LoadingSpinner />;
   if (locationNotAllowed)
