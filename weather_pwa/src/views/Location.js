@@ -68,6 +68,8 @@ const Location = () => {
           description={weather.current.weather[0].description}
           temp={weather.current.main.temp}
           icon={weather.current.weather[0].icon}
+          includeFavoriteBtn={true}
+          cityName={weather.current.name}
         />
         <ForecastList forecastArray={weather.forecast.daily} />
       </main>

@@ -1,8 +1,16 @@
 import { formatUnixToDate } from "../helperFunctions";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import FavoriteToogleBtn from "./FavoriteToogleBtn";
 
-const CurrentWeather = ({ unixTimestamp, description, temp, icon }) => {
+const CurrentWeather = ({
+  unixTimestamp,
+  description,
+  temp,
+  icon,
+  includeFavoriteBtn,
+  cityName,
+}) => {
   const date = formatUnixToDate(unixTimestamp);
   const oneHourBehind = `${date.getHours() - 1}:00`;
   const currentTime = `${date.getHours()}:00`;
@@ -16,6 +24,7 @@ const CurrentWeather = ({ unixTimestamp, description, temp, icon }) => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
   `;
   const tempStyle = css`
     font-weight: 500;
@@ -52,6 +61,7 @@ const CurrentWeather = ({ unixTimestamp, description, temp, icon }) => {
         <span css={activeTimeStyle}>{currentTime}</span>
         <span css={passiveTimeStyle}>{OneHourAhead}</span>
       </div>
+      {includeFavoriteBtn && <FavoriteToogleBtn cityName={cityName} />}
       <h2 css={descriptionStyle}>
         {day}, {description}
       </h2>
