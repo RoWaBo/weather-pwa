@@ -3,12 +3,22 @@ import { formatUnixToDate } from "../helperFunctions";
 import { css } from "@emotion/react";
 
 const ForecastList = ({ forecastArray }) => {
+  const formatTemp = (temp) => temp.toString().split(".")[0] + "°";
+
+  const ifPlusTempAddPadding = (temp) => {
+    if (!temp.toString().includes("-"))
+      return css`
+        padding-left: 0.55rem;
+      `;
+  };
+
+  // === STYLE ===
   const listContainerStyle = css`
     margin: 2rem 1rem;
   `;
   const listItemStyle = css`
     display: flex;
-    margin-bottom: 0.5rem;
+    /* margin-bottom: 0.5rem; */
   `;
   const timeStyle = css`
     font-size: 14px;
@@ -24,10 +34,10 @@ const ForecastList = ({ forecastArray }) => {
     font-weight: 500;
   `;
   const maxTempStyle = css`
-    width: 1.8rem;
+    width: 1.9rem;
   `;
   const minTempStyle = css`
-    width: 1.8rem;
+    width: 1.9rem;
     text-align: end;
     color: rgba(59, 60, 58, 0.5);
   `;
@@ -55,12 +65,12 @@ const ForecastList = ({ forecastArray }) => {
                 `}
               ></div>
               <div css={tempContainerStyle}>
-                <span css={maxTempStyle}>
-                  {forecast.temp.max.toString().split(".")[0] + "°"}
+                <span
+                  css={[maxTempStyle, ifPlusTempAddPadding(forecast.temp.max)]}
+                >
+                  {formatTemp(forecast.temp.max)}
                 </span>
-                <span css={minTempStyle}>
-                  {forecast.temp.min.toString().split(".")[0] + "°"}
-                </span>
+                <span css={minTempStyle}>{formatTemp(forecast.temp.min)}</span>
               </div>
             </li>
           )
