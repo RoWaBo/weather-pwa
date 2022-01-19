@@ -4,10 +4,7 @@ import { css } from "@emotion/react";
 import { useState } from "react";
 
 const FavoriteToogleBtn = ({ cityName }) => {
-  const getLsFavoriteCities = JSON.parse(
-    localStorage.getItem("favoriteCities")
-  );
-  let favoriteCities = getLsFavoriteCities ? getLsFavoriteCities : [];
+  let favoriteCities = JSON.parse(localStorage.getItem("favoriteCities")) || [];
 
   const [isFavorite, setIsFavorite] = useState(
     favoriteCities.includes(cityName) ? true : false
