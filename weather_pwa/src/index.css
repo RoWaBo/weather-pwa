@@ -36,9 +36,12 @@ ul {
 h1,
 h2,
 h3,
-h4 {
+h4,
+input,
+label {
   font-weight: 500;
   color: #3b3c3a;
+  font-family: "Poppins", sans-serif;
 }
 
 p,
