@@ -3,31 +3,47 @@ import { useParams } from "react-router-dom";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import axios from "axios";
+import Header from "../components/Header";
+import CurrentWeather from "../components/CurrentWeather";
+import ForecastList from "../components/ForecastList";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Search = () => {
   const { cityName } = useParams();
 
   const [searchInput, setSearchInput] = useState("");
-  const [formError, setFormError] = useState(false);
-  const [cityWeather, setCityWeather] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [weather, setWeather] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    searchInput !== "" ? fetchCityWeather() : setFormError(true);
+    searchInput !== ""
+      ? fetchCityWeather()
+      : setErrorMessage("You must enter a city name");
   };
   const fetchCityWeather = async () => {
     try {
       const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
       const city = cityName === "searching" ? searchInput : cityName;
 
-      const { data } = await axios(
+      const { data: current } = await axios(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
       );
-      setCityWeather(data);
+
+      const lon = current.coord.lon;
+      const lat = current.coord.lat;
+
+      const { data: forecast } = await axios(
+        `https://api.openweathermap.org/data/2.5/onecall?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`
+      );
+
+      setWeather({ forecast, current });
     } catch (err) {
-      alert(err);
+      setErrorMessage("The city could not be found");
     }
   };
+
+  if (cityName !== "searching" && !weather) fetchCityWeather();
 
   // === STYLE ===
   const containerStyle = css`
@@ -83,10 +99,10 @@ const Search = () => {
     color: #ff2727;
     margin: 1.5rem 0 0;
   `;
-  if (cityName === "searching")
+  if (cityName === "searching" && !weather)
     return (
       <div css={containerStyle}>
-        <form onSubmit={handleSubmit} css={formStyle}>
+        <form onSubmit={handleSubmit} method="post" css={formStyle}>
           <label name="search" id="search" css={labelStyle}>
             Enter a city name
           </label>
@@ -97,13 +113,30 @@ const Search = () => {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             css={inputStyle}
-            onFocus={() => setFormError(false)}
+            onFocus={() => setErrorMessage(false)}
           />
-          {formError && <p css={formErrorStyle}>You must enter a city name!</p>}
+          {errorMessage && <p css={formErrorStyle}>{errorMessage}</p>}
           <input type="submit" value="Search" css={submitStyle} />
         </form>
       </div>
     );
+  if (weather)
+    return (
+      <main>
+        <Header
+          locationName={weather.current.name}
+          country={weather.current.sys.country}
+        />
+        <CurrentWeather
+          unixTimestamp={weather.current.dt}
+          description={weather.current.weather[0].description}
+          temp={weather.current.main.temp}
+          icon={weather.current.weather[0].icon}
+        />
+        <ForecastList forecastArray={weather.forecast.daily} />
+      </main>
+    );
+  if (cityName !== "searching" && !weather) return <LoadingSpinner />;
 };
 
 export default Search;
