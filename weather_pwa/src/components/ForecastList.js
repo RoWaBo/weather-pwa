@@ -5,13 +5,6 @@ import { css } from "@emotion/react";
 const ForecastList = ({ forecastArray }) => {
   const formatTemp = (temp) => temp.toString().split(".")[0] + "°";
 
-  const ifPlusTempAddPadding = (temp) => {
-    if (!temp.toString().includes("-"))
-      return css`
-        padding-left: 0.55rem;
-      `;
-  };
-
   // === STYLE ===
   const listContainerStyle = css`
     margin: 2rem 1rem;
@@ -34,10 +27,10 @@ const ForecastList = ({ forecastArray }) => {
     font-weight: 500;
   `;
   const maxTempStyle = css`
-    width: 2.2rem;
+    /* text-align: end; */
   `;
   const minTempStyle = css`
-    width: 2.2rem;
+    width: 3rem;
     text-align: end;
     color: rgba(59, 60, 58, 0.5);
   `;
@@ -65,11 +58,7 @@ const ForecastList = ({ forecastArray }) => {
                 `}
               ></div>
               <div css={tempContainerStyle}>
-                <span
-                  css={[maxTempStyle, ifPlusTempAddPadding(forecast.temp.max)]}
-                >
-                  {formatTemp(forecast.temp.max)}
-                </span>
+                <span css={maxTempStyle}>{formatTemp(forecast.temp.max)}</span>
                 <span css={minTempStyle}>{formatTemp(forecast.temp.min)}</span>
               </div>
             </li>
