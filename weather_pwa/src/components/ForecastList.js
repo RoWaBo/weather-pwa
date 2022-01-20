@@ -11,7 +11,7 @@ const ForecastList = ({ forecastArray }) => {
   `;
   const listItemStyle = css`
     display: flex;
-    /* margin-bottom: 0.5rem; */
+    margin-bottom: 0.5rem;
   `;
   const timeStyle = css`
     font-size: 14px;

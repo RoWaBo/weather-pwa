@@ -39,6 +39,7 @@ const FavoriteToogleBtn = ({ cityName }) => {
   `;
   const iconStyle = css`
     font-size: 2.5rem;
+    color: #3b3c3a;
   `;
   return (
     <button css={btnStyle} onClick={toggleFavoriteToLS}>

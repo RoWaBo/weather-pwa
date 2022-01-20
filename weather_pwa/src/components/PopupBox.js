@@ -38,6 +38,7 @@ const PopupBox = ({ message }) => {
   const iconStyle = css`
     font-size: 60px;
     margin-bottom: 2rem;
+    color: #3b3c3a;
   `;
 
   return (
