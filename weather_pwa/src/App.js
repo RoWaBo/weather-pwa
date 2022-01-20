@@ -6,6 +6,7 @@ import Favorites from "./views/Favorites";
 import Navigation from "./components/Navigation";
 import MainLayout from "./components/MainLayout";
 import Location from "./views/Location";
+import Fallback from "./views/Fallback";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="search" element={<Search />} />
           <Route path="favorites" element={<Favorites />} />
           <Route path="location/:cityName" element={<Location />} />
+          <Route path="*" element={<Fallback />} />
         </Routes>
       </MainLayout>
       <Navigation />
