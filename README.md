@@ -1,3 +1,4 @@
+# Site is live here: flying-unicorn-weather.netlify.app
 # PWA-den-valgfrie-opgave
 
 # Formål: 
