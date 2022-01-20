@@ -5,10 +5,12 @@ import PopupBox from "../components/PopupBox";
 import Header from "../components/Header";
 import CurrentWeather from "../components/CurrentWeather";
 import ForecastList from "../components/ForecastList";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [weather, setWeather] = useState();
   const [locationNotAllowed, setLocationNotAllowed] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -34,7 +36,7 @@ const Home = () => {
             );
             setWeather({ forecast, current });
           } catch (err) {
-            alert("Fetching from open weather map went wrong - " + err);
+            navigate("/Fallback");
           }
         });
       }
