@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Favorites = () => {
   const [weather, setWeather] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const favoriteCities =
@@ -18,7 +20,7 @@ const Favorites = () => {
           );
           cityWeather.push(data);
         } catch (err) {
-          console.log(err);
+          navigate("/Fallback");
         }
       });
       setWeather(cityWeather);
