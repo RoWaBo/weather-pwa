@@ -1,10 +1,8 @@
-import { formatUnixToDate } from "../helperFunctions";
+import { formatTemp, formatUnixToDate } from "../helperFunctions";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
 const ForecastList = ({ forecastArray }) => {
-  const formatTemp = (temp) => temp.toString().split(".")[0] + "°";
-
   // === STYLE ===
   const listContainerStyle = css`
     margin: 2rem 1rem;
