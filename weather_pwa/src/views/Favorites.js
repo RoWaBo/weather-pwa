@@ -11,26 +11,24 @@ import SmallWeatherInfoItem from "../components/SmallWeatherInfoItem";
 const Favorites = () => {
   const [weather, setWeather] = useState();
   const navigate = useNavigate();
-  const [favoriteCities, setFavoriteCities] = useState(
+  const [favoriteCities] = useState(
     JSON.parse(localStorage.getItem("favoriteCities")) || []
   );
 
   useEffect(() => {
     if (favoriteCities.length > 0) {
-      let cityWeather = [];
-      favoriteCities.forEach(async (cityName) => {
-        try {
-          const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
-          const { data } = await axios(
-            `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`
-          );
-          cityWeather.push(data);
-        } catch (err) {
-          navigate("/Fallback");
-        }
-      });
-      console.log(cityWeather);
-      setWeather(cityWeather);
+      const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
+
+      axios
+        .all(
+          favoriteCities.map((cityName) => {
+            return axios.get(
+              `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`
+            );
+          })
+        )
+        .then((data) => setWeather(data))
+        .catch(() => navigate("/Fallback"));
     }
   }, [navigate, favoriteCities]);
 
@@ -50,6 +48,12 @@ const Favorites = () => {
     margin-bottom: 2rem;
     color: #3b3c3a;
   `;
+  const cityListStyle = css`
+    padding: 1rem;
+  `;
+  const cityListItemStyle = css`
+    /* margin-bottom: 2rem; */
+  `;
 
   return (
     <>
@@ -57,15 +61,14 @@ const Favorites = () => {
         <h1 css={headingStyle}>Your favorites</h1>
       </header>
       {weather && weather.length > 0 && (
-        <ul>
-          {console.log(weather)}
-          {weather.map((city, index) => (
-            <li key={index}>
-              <Link to={`/location/${city.name}`}>
+        <ul css={cityListStyle}>
+          {weather.map((city) => (
+            <li key={city.data.id} css={cityListItemStyle}>
+              <Link to={`/location/${city.data.name}`}>
                 <SmallWeatherInfoItem
-                  title={city.name}
-                  icon={city.weather[0].icon}
-                  avgTemp={city.main.temp}
+                  title={city.data.name}
+                  icon={city.data.weather[0].icon}
+                  avgTemp={city.data.main.temp}
                 />
               </Link>
             </li>
