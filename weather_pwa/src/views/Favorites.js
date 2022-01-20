@@ -10,12 +10,11 @@ import { ImHeartBroken } from "react-icons/im";
 const Favorites = () => {
   const [weather, setWeather] = useState();
   const navigate = useNavigate();
-  const favoriteCities = JSON.parse(localStorage.getItem("favoriteCities"));
+  const [favoriteCities, setFavoriteCities] = useState(
+    JSON.parse(localStorage.getItem("favoriteCities")) || []
+  );
 
   useEffect(() => {
-    const favoriteCities =
-      JSON.parse(localStorage.getItem("favoriteCities")) || [];
-
     if (favoriteCities.length > 0) {
       let cityWeather = [];
       favoriteCities.forEach(async (cityName) => {
@@ -29,7 +28,7 @@ const Favorites = () => {
           navigate("/Fallback");
         }
       });
-      setWeather(cityWeather);
+      setWeather(cityWeather, favoriteCities);
     }
   }, [navigate]);
 
@@ -57,7 +56,7 @@ const Favorites = () => {
       </header>
       {weather && <ul>{}</ul>}
       {!weather && favoriteCities && <LoadingSpinner />}
-      {!favoriteCities && (
+      {favoriteCities.length === 0 && (
         <CenterContainer>
           <ImHeartBroken css={errorIconStyle} />
           <h2 css={errorMessageStyle}>You have no favorites</h2>
