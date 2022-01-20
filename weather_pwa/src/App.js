@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import MainLayout from "./components/MainLayout";
 import Location from "./views/Location";
 import Fallback from "./views/Fallback";
+import PWAPrompt from "react-ios-pwa-prompt";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         </Routes>
       </MainLayout>
       <Navigation />
+      <PWAPrompt />
     </>
   );
 }
