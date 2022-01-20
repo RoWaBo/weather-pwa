@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
 import LoadingSpinner from "../components/LoadingSpinner";
 import CenterContainer from "../components/CenterContainer";
 import { ImHeartBroken } from "react-icons/im";
+import SmallWeatherInfoItem from "../components/SmallWeatherInfoItem";
 
 const Favorites = () => {
   const [weather, setWeather] = useState();
@@ -54,7 +55,22 @@ const Favorites = () => {
       <header css={headerStyle}>
         <h1 css={headingStyle}>Your favorites</h1>
       </header>
-      {weather && <ul>{}</ul>}
+      {weather && (
+        <ul>
+          {weather.map((city, index) => (
+            <li key={index}>
+              <h2>TEST</h2>
+              <Link to={`/location/${city.name}`}>
+                <SmallWeatherInfoItem
+                  title={city.name}
+                  icon={city.weather[0].icon}
+                  avgTemp={city.main.temp}
+                />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
       {!weather && favoriteCities && <LoadingSpinner />}
       {favoriteCities.length === 0 && (
         <CenterContainer>
