@@ -25,7 +25,7 @@ const Favorites = () => {
       });
       setWeather(cityWeather);
     }
-  }, []);
+  }, [navigate]);
 
   return <h1>this is the favorites view</h1>;
 };

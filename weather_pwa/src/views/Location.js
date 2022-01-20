@@ -42,7 +42,7 @@ const Location = () => {
         }
       }
     })();
-  }, [cityName]);
+  }, [cityName, navigate]);
 
   // === STYLE ===
   const errorMessageStyle = css`
