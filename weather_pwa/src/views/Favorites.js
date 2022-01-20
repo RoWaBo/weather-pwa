@@ -29,9 +29,10 @@ const Favorites = () => {
           navigate("/Fallback");
         }
       });
-      setWeather(cityWeather, favoriteCities);
+      console.log(cityWeather);
+      setWeather(cityWeather);
     }
-  }, [navigate]);
+  }, [navigate, favoriteCities]);
 
   // === STYLE ===
   const headingStyle = css`
@@ -55,11 +56,11 @@ const Favorites = () => {
       <header css={headerStyle}>
         <h1 css={headingStyle}>Your favorites</h1>
       </header>
-      {weather && (
+      {weather && weather.length > 0 && (
         <ul>
+          {console.log(weather)}
           {weather.map((city, index) => (
             <li key={index}>
-              <h2>TEST</h2>
               <Link to={`/location/${city.name}`}>
                 <SmallWeatherInfoItem
                   title={city.name}
@@ -71,7 +72,7 @@ const Favorites = () => {
           ))}
         </ul>
       )}
-      {!weather && favoriteCities && <LoadingSpinner />}
+      {!weather && favoriteCities.length > 0 && <LoadingSpinner />}
       {favoriteCities.length === 0 && (
         <CenterContainer>
           <ImHeartBroken css={errorIconStyle} />
