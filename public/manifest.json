@@ -3,18 +3,18 @@
   "name": "Unicorn Weather",
   "icons": [
     {
-      "src": "unicornIcon.jpg",
+      "src": "unicornIcon.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/jpg"
+      "type": "image/png"
     },
     {
-      "src": "unicornLogo192.jpg",
-      "type": "image/jpg",
+      "src": "unicornLogo192.png",
+      "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "unicornLogo512.jpg",
-      "type": "image/jpg",
+      "src": "unicornLogo512.png",
+      "type": "image/png",
       "sizes": "512x512"
     }
   ],
