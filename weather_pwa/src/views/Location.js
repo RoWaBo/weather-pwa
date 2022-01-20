@@ -34,7 +34,11 @@ const Location = () => {
 
         setWeather({ forecast, current });
       } catch (err) {
-        setErrorMessage("The city could not be found");
+        if (err.response.status === 404) {
+          setErrorMessage("The city could not be found");
+        } else {
+          navigate("/Fallback");
+        }
       }
     })();
   }, [cityName]);
