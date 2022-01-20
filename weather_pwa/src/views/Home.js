@@ -41,7 +41,7 @@ const Home = () => {
         });
       }
     })();
-  }, []);
+  }, [navigate]);
 
   if (weather)
     return (

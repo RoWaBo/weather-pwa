@@ -34,7 +34,6 @@ const Location = () => {
 
         setWeather({ forecast, current });
       } catch (err) {
-        console.log(err.response);
         if (!err.response) {
           navigate("/Fallback");
         } else if (err.response.status === 404) {

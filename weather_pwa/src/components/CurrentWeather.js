@@ -42,7 +42,7 @@ const CurrentWeather = ({
     padding: 1rem;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
 
     font-weight: 500;
     font-size: 14px;
@@ -69,7 +69,6 @@ const CurrentWeather = ({
       <div
         css={css`
           mask: url(${`./weatherIcons/${icon}.svg`}) no-repeat center;
-          /* mask: url(${`./weatherIcons/01d.svg`}) no-repeat center; */
           width: 360px;
           height: 360px;
           mask-size: contain;

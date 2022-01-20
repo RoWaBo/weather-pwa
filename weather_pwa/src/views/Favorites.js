@@ -39,6 +39,7 @@ const Favorites = () => {
   `;
   const headerStyle = css`
     padding: 1rem;
+    margin-bottom: 1rem;
   `;
   const errorMessageStyle = css`
     font-size: 20px;
@@ -52,7 +53,7 @@ const Favorites = () => {
     padding: 1rem;
   `;
   const cityListItemStyle = css`
-    /* margin-bottom: 2rem; */
+    margin-bottom: 1.5rem;
   `;
 
   return (

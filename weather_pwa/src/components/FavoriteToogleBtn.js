@@ -30,8 +30,8 @@ const FavoriteToogleBtn = ({ cityName }) => {
     padding: 0.5rem;
     background: none;
     position: absolute;
-    top: 3.3rem;
-    right: 0.5rem;
+    top: 2.65rem;
+    right: 0.3rem;
 
     & > * {
       pointer-events: none;
