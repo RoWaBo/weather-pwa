@@ -46,7 +46,7 @@ const FavoriteToogleBtn = ({ cityName }) => {
   const iconStyle = css`
     font-size: 2.5rem;
     color: #3b3c3a;
-    filter: drop-shadow(3px 3px 5px rgb(0 0 0 / 0.5));
+    filter: drop-shadow(3px 3px 5px rgb(0 0 0 / 0.4));
     
     ${saveStatus !== '' && 'animation: heartBeat 2.5s'}
   `;

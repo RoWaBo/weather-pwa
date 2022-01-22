@@ -7,7 +7,7 @@ const ForecastList = ({ forecastArray }) => {
   const listContainerStyle = css`
     margin: 2rem 1rem;
 
-    animation: fadeInUp 2s;
+    animation: fadeInUp 1.5s;
   `;
   const listItemStyle = css`
     display: flex;

@@ -47,6 +47,8 @@ const Search = () => {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    animation: fadeIn 1s;
   `;
   const submitStyle = css`
     padding: 0.5rem 2rem;
