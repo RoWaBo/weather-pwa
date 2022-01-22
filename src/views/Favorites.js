@@ -36,14 +36,6 @@ const Favorites = () => {
   }, [navigate, favoriteCities]);
 
   // === STYLE ===
-  const headingStyle = css`
-    font-size: 20px;
-    text-align: center;
-  `;
-  const headerStyle = css`
-    padding: 1rem;
-    margin-bottom: 1rem;
-  `;
   const errorMessageStyle = css`
     font-size: 20px;
   `;
