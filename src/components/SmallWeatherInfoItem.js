@@ -9,6 +9,8 @@ const SmallWeatherInfoItem = ({ title, icon, avgTemp, cityName }) => {
     padding: 2rem 1rem;
     background: rgba(255, 252, 253, 0.5);
     border-radius: 20px;
+
+    animation: fadeInUp 1s;
   `;
   const tempStyle = css`
     font-size: 16px;

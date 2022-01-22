@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { BrowserRouter } from "react-router-dom";
+import 'animate.css';
 
 ReactDOM.render(
   <React.StrictMode>

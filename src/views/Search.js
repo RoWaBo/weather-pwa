@@ -3,6 +3,8 @@ import { css } from "@emotion/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CenterContainer from "../components/CenterContainer";
+import SimpelHeader from "../components/SimpelHeader";
+import { IoMdSearch } from "react-icons/io";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ const Search = () => {
   // === STYLE ===
   const labelStyle = css`
     display: block;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     margin-bottom: 1rem;
   `;
@@ -32,10 +34,12 @@ const Search = () => {
     padding: 0.8rem;
     font-size: 14px;
     background: #fffcfd;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: .25s;
 
     &:focus {
       box-shadow: #e0aca3 0px 1px 3px 0px, #e0aca3 0px 0px 0px 1px;
+      transition: .25s;
     }
   `;
   const formStyle = css`
@@ -43,6 +47,8 @@ const Search = () => {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    animation: fadeIn 1s;
   `;
   const submitStyle = css`
     padding: 0.5rem 2rem;
@@ -62,24 +68,27 @@ const Search = () => {
     margin: 1.5rem 0 0;
   `;
   return (
-    <CenterContainer>
-      <form onSubmit={handleSubmit} method="post" css={formStyle}>
-        <label name="search" id="search" css={labelStyle}>
-          Enter a city name
-        </label>
-        <input
-          type="text"
-          name="search"
-          id="search"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          css={inputStyle}
-          onFocus={() => setErrorMessage(false)}
-        />
-        {errorMessage && <p css={formErrorStyle}>{errorMessage}</p>}
-        <input type="submit" value="Search" css={submitStyle} />
-      </form>
-    </CenterContainer>
+    <>
+      <SimpelHeader heading="search" icon={<IoMdSearch />} />
+      <CenterContainer>
+        <form onSubmit={handleSubmit} method="post" css={formStyle}>
+          <label name="search" id="search" css={labelStyle}>
+            Enter a city name
+          </label>
+          <input
+            type="text"
+            name="search"
+            id="search"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            css={inputStyle}
+            onFocus={() => setErrorMessage(false)}
+          />
+          {errorMessage && <p css={formErrorStyle}>{errorMessage}</p>}
+          <input type="submit" value="Search" css={submitStyle} />
+        </form>
+      </CenterContainer>
+    </>
   );
 };
 
