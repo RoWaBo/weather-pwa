@@ -8,6 +8,8 @@ const Header = ({ locationName, country }) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    animation: fadeIn 1s;
   `;
   const textStyle = css`
     font-size: 20px;

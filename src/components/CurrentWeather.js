@@ -25,6 +25,8 @@ const CurrentWeather = ({
     justify-content: center;
     align-items: center;
     position: relative;
+
+    animation: fadeIn 1s;
   `;
   const tempStyle = css`
     font-weight: 500;
