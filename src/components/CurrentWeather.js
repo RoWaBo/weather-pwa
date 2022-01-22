@@ -14,7 +14,7 @@ const CurrentWeather = ({
   const date = formatUnixToDate(unixTimestamp);
   const oneHourBehind = `${date.getHours() - 1}:00`;
   const currentTime = `${date.getHours()}:00`;
-  const OneHourAhead = `${date.getHours() + 1}:00`;
+  const oneHourAhead = `${date.getHours() + 1}:00`;
   const day = date.toLocaleString("en-US", { weekday: "long" });
   const tempNoDecimals = temp.toString().split(".")[0];
 
@@ -59,7 +59,7 @@ const CurrentWeather = ({
       <div css={timeContainerStyle}>
         <span css={passiveTimeStyle}>{oneHourBehind}</span>
         <span css={activeTimeStyle}>{currentTime}</span>
-        <span css={passiveTimeStyle}>{OneHourAhead}</span>
+        <span css={passiveTimeStyle}>{oneHourAhead}</span>
       </div>
       {includeFavoriteBtn && <FavoriteToogleBtn cityName={cityName} />}
       <h2 css={descriptionStyle}>
