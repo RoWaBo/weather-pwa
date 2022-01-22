@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 
 const Header = ({ locationName, country }) => {
   const headerStyle = css`
-    padding: 1rem;
+    padding: 1.5rem 1rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
