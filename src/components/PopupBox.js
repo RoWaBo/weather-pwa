@@ -10,6 +10,8 @@ const PopupBox = ({ message }) => {
     left: 0;
     width: 100%;
     height: 100%;
+
+    animation: fadeIn 1s;
   `;
   const popup = css`
     position: absolute;
@@ -29,6 +31,8 @@ const PopupBox = ({ message }) => {
     align-items: center;
     text-align: center;
     border-radius: 20px;
+
+    animation: fadeInDown 1s backwards;
   `;
 
   const textStyle = css`
