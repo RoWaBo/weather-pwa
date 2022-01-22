@@ -7,6 +7,9 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import CenterContainer from "../components/CenterContainer";
 import { ImHeartBroken } from "react-icons/im";
 import SmallWeatherInfoItem from "../components/SmallWeatherInfoItem";
+import SimpelHeader from "../components/SimpelHeader";
+import { IoMdHeart } from "react-icons/io";
+
 
 const Favorites = () => {
   const [weather, setWeather] = useState();
@@ -58,9 +61,7 @@ const Favorites = () => {
 
   return (
     <>
-      <header css={headerStyle}>
-        <h1 css={headingStyle}>Your favorites</h1>
-      </header>
+      <SimpelHeader heading="Your favorties" icon={<IoMdHeart />} />
       {weather && weather.length > 0 && (
         <ul css={cityListStyle}>
           {weather.map((city) => (
