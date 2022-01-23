@@ -19,10 +19,10 @@ const Navigation = () => {
     position: fixed;
     bottom: 0;
     width: 100vw;
-    padding: .5rem 2.5rem;
+    padding: .6rem 2.5rem;
     background: #fffcfd;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 20px 20px 0 0;
+    border-radius: 15px 15px 0 0;
   `;
   const listStyle = css`
     display: flex;
@@ -31,10 +31,10 @@ const Navigation = () => {
   `;
 
   const itemStyle = css`
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   `;
   const linkStyle = css`
-    padding: .5rem;
+    padding: .6rem;
     display: flex;
     transition: 0.25s;
 

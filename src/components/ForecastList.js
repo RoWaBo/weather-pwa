@@ -5,7 +5,7 @@ import { css } from "@emotion/react";
 const ForecastList = ({ forecastArray }) => {
   // === STYLE ===
   const listContainerStyle = css`
-    margin: 2rem 1rem;
+    margin: 1.5rem 1rem;
 
     animation: fadeInUp 1.5s;
   `;

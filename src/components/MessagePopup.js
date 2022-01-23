@@ -16,12 +16,13 @@ const MessagePopup = ({ message, icon }) => {
         animation: fadeInUp 1s, fadeOutDown 1s 4s forwards;
 
         & > svg {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
+            color: #3b3c3a;
         }
 
     `
     const messageStyle = css`
-        font-size: 14px;
+        font-size: 18px;
         text-align: center;
         margin-left: .5rem;
         margin-top: 0.1rem;
