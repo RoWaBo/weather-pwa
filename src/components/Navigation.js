@@ -6,17 +6,15 @@ import { css } from "@emotion/react";
 
 const Navigation = () => {
 
-  const toggleLinkStyle = isActive => {
-    const passiveLink = {
-      boxShadow: '20px 20px 60px rgba(0, 0, 0, .4), -20px -20px 60px #fffcfd'
-    }
+  const activeLinkStyleIf = isActive => {
     const activeLink = {
-      boxShadow: 'inset 20px 20px 60px rgba(0, 0, 0, .09), inset -20px -20px 60px #fffcfd'
+      boxShadow: 'inset 20px 20px 60px rgba(0, 0, 0, .07), inset -20px -20px 60px #fffcfd'
     }
 
-    return isActive ? activeLink : passiveLink
+    return isActive ? activeLink : null
   }
 
+  // === STYLING ===
   const navStyle = css`
     position: fixed;
     bottom: 0;
@@ -42,6 +40,7 @@ const Navigation = () => {
     border-radius: 50%;
     background: #FFF;
     transition: 0.25s;
+    box-shadow: 20px 20px 60px rgba(0, 0, 0, .3), -20px -20px 60px #fffcfd;
 
     & > svg {
       color: #3b3c3a;
@@ -52,17 +51,17 @@ const Navigation = () => {
     <nav css={navStyle}>
       <ul css={listStyle}>
         <li css={itemStyle}>
-          <NavLink to="/favorites" css={linkStyle} style={({ isActive }) => toggleLinkStyle(isActive)}>
+          <NavLink to="/favorites" css={linkStyle} style={({ isActive }) => activeLinkStyleIf(isActive)}>
             <IoMdHeart />
           </NavLink>
         </li>
         <li css={itemStyle}>
-          <NavLink to="/" css={linkStyle} style={({ isActive }) => toggleLinkStyle(isActive)}>
+          <NavLink to="/" css={linkStyle} style={({ isActive }) => activeLinkStyleIf(isActive)}>
             <IoLocationSharp />
           </NavLink>
         </li>
         <li css={itemStyle}>
-          <NavLink to="/search" css={linkStyle} style={({ isActive }) => toggleLinkStyle(isActive)}>
+          <NavLink to="/search" css={linkStyle} style={({ isActive }) => activeLinkStyleIf(isActive)}>
             <IoMdSearch />
           </NavLink>
         </li>
