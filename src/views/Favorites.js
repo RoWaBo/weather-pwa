@@ -56,13 +56,14 @@ const Favorites = () => {
       <SimpelHeader heading="Your favorties" icon={<IoMdHeart />} />
       {weather && weather.length > 0 && (
         <ul css={cityListStyle}>
-          {weather.map((city) => (
+          {weather.map((city, index) => (
             <li key={city.data.id} css={cityListItemStyle}>
               <Link to={`/location/${city.data.name}`}>
                 <SmallWeatherInfoItem
                   title={city.data.name}
                   icon={city.data.weather[0].icon}
                   avgTemp={city.data.main.temp}
+                  animationDelay={index}
                 />
               </Link>
             </li>
