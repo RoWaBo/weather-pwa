@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CenterContainer from "../components/CenterContainer";
 import SimpelHeader from "../components/SimpelHeader";
 import { IoMdSearch } from "react-icons/io";
+import { FaSearchLocation } from 'react-icons/fa';
 
 const Search = () => {
   const navigate = useNavigate();
@@ -67,10 +68,19 @@ const Search = () => {
     color: #ff2727;
     margin: 1.5rem 0 0;
   `;
+  const searchIconStyle = css`
+    font-size: 80px;
+    /* color: #3b3c3a; */
+    color: rgba(255, 255, 255, .7);
+    margin-bottom: 2rem;
+
+    animation: fadeIn 1s;
+  `;
   return (
     <>
-      <SimpelHeader heading="search" icon={<IoMdSearch />} />
+      <SimpelHeader heading="search location" icon={<IoMdSearch />} />
       <CenterContainer>
+        <FaSearchLocation css={searchIconStyle} />
         <form onSubmit={handleSubmit} method="post" css={formStyle}>
           <label name="search" id="search" css={labelStyle}>
             Enter a city name
