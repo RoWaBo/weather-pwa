@@ -2,7 +2,7 @@ import { formatTemp } from "../helperFunctions";
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
 
-const SmallWeatherInfoItem = ({ title, icon, avgTemp, cityName }) => {
+const SmallWeatherInfoItem = ({ title, icon, avgTemp, animationDelay }) => {
   const sectionStyle = css`
     display: flex;
     align-items: center;
@@ -10,7 +10,7 @@ const SmallWeatherInfoItem = ({ title, icon, avgTemp, cityName }) => {
     background: rgba(255, 252, 253, 0.5);
     border-radius: 20px;
 
-    animation: fadeInUp 1s;
+    animation: fadeInUp 1s 0.${animationDelay}s backwards;
   `;
   const tempStyle = css`
     font-size: 16px;

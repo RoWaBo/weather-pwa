@@ -3,8 +3,8 @@ import { css } from "@emotion/react";
 
 const SimpelHeader = ({ heading, icon }) => {
 
-    const headerStyle = css`
-    padding: 1.5rem 1rem 1rem;
+  const headerStyle = css`
+    padding: 1.5rem 1rem 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,7 +17,7 @@ const SimpelHeader = ({ heading, icon }) => {
         color: #3b3c3a;    
     }
   `;
-    const headingStyle = css`
+  const headingStyle = css`
     font-size: 20px;
     font-weight: 500;
     text-transform: capitalize;
@@ -25,12 +25,12 @@ const SimpelHeader = ({ heading, icon }) => {
 
   `;
 
-    return (
-        <header css={headerStyle}>
-            {icon}
-            <h1 css={headingStyle}>{heading}</h1>
-        </header>
-    );
+  return (
+    <header css={headerStyle}>
+      {icon}
+      <h1 css={headingStyle}>{heading}</h1>
+    </header>
+  );
 }
 
 export default SimpelHeader;
