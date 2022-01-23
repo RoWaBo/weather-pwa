@@ -8,7 +8,7 @@ const Navigation = () => {
 
   const activeLinkStyleIf = isActive => {
     const activeLink = {
-      boxShadow: 'inset 20px 20px 60px rgba(0, 0, 0, .07), inset -20px -20px 60px #fffcfd'
+      boxShadow: 'inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5)'
     }
 
     return isActive ? activeLink : null
@@ -19,7 +19,7 @@ const Navigation = () => {
     position: fixed;
     bottom: 0;
     width: 100vw;
-    padding: .5rem 2rem;
+    padding: .5rem 2.5rem;
     background: #fffcfd;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 20px 20px 0 0;
@@ -34,13 +34,13 @@ const Navigation = () => {
     font-size: 1.5rem;
   `;
   const linkStyle = css`
-  /* padding: 1rem 2rem; */
     padding: .5rem;
     display: flex;
-    border-radius: 50%;
-    background: #FFF;
     transition: 0.25s;
-    box-shadow: 20px 20px 60px rgba(0, 0, 0, .3), -20px -20px 60px #fffcfd;
+
+    border-radius: 15px;
+    box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2),
+    -12px -12px 24px 0 rgba(255, 255, 255, 0.5);
 
     & > svg {
       color: #3b3c3a;
