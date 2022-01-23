@@ -9,38 +9,42 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [weather, setWeather] = useState();
-  const [locationNotAllowed, setLocationNotAllowed] = useState(false);
+  const [locationErrorMessage, setLocationErrorMessage] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    (async () => {
-      // Check if location is allowed
-      const { state: permission } = await navigator.permissions.query({
-        name: "geolocation",
-      });
-      if (permission === "denied") return setLocationNotAllowed(true);
+    // Fetch current position OpenWeatherMap data
+    if ("geolocation" in navigator) {
 
-      // Fetch current position OpenWeatherMap data
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(async (position) => {
-          try {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
-
-            const { data: forecast } = await axios(
-              `https://api.openweathermap.org/data/2.5/onecall?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`
-            );
-            const { data: current } = await axios(
-              `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`
-            );
-            setWeather({ forecast, current });
-          } catch (err) {
-            navigate("/Fallback");
-          }
-        });
+      const geolocationError = error => {
+        switch (error.code) {
+          case 1: setLocationErrorMessage('Please allow this site to use your location')
+            break;
+          case 2: setLocationErrorMessage('Your location is unavailable')
+            break;
+          case 3: setLocationErrorMessage('Location acquisition timed out')
+            break;
+        }
       }
-    })();
+
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        try {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
+
+          const { data: forecast } = await axios(
+            `https://api.openweathermap.org/data/2.5/onecall?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`
+          );
+          const { data: current } = await axios(
+            `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`
+          );
+          setWeather({ forecast, current });
+        } catch (err) {
+          navigate("/Fallback");
+        }
+      }, geolocationError);
+    }
   }, [navigate]);
 
   if (weather)
@@ -59,9 +63,9 @@ const Home = () => {
         <ForecastList forecastArray={weather.forecast.daily} />
       </main>
     );
-  if (!weather && !locationNotAllowed) return <LoadingSpinner />;
-  if (locationNotAllowed)
-    return <PopupBox message="Please allow this site to use your location" />;
+  if (!weather && !locationErrorMessage) return <LoadingSpinner />;
+  if (locationErrorMessage)
+    return <PopupBox message={locationErrorMessage} />;
 };
 
 export default Home;
