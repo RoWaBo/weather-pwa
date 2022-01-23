@@ -8,7 +8,7 @@ import MessagePopup from "./MessagePopup";
 const FavoriteToogleBtn = ({ cityName }) => {
   let favoriteCities = JSON.parse(localStorage.getItem("favoriteCities")) || [];
 
-  const [saveStatus, setSaveStatus] = useState('');
+  const [popupStatus, setPopupStatus] = useState('');
 
   const [isFavorite, setIsFavorite] = useState(
     favoriteCities.includes(cityName) ? true : false
@@ -18,13 +18,13 @@ const FavoriteToogleBtn = ({ cityName }) => {
     if (!favoriteCities.includes(cityName)) {
       favoriteCities.push(cityName);
       setIsFavorite(true);
-      setSaveStatus('saved')
+      setPopupStatus('saved')
     } else {
       favoriteCities = favoriteCities.filter(
         (lsCityName) => lsCityName !== cityName
       );
       setIsFavorite(false);
-      setSaveStatus('removed')
+      setPopupStatus('removed')
     }
     localStorage.setItem("favoriteCities", JSON.stringify(favoriteCities));
   };
@@ -48,7 +48,7 @@ const FavoriteToogleBtn = ({ cityName }) => {
     color: #3b3c3a;
     filter: drop-shadow(3px 3px 5px rgb(0 0 0 / 0.4));
     
-    ${saveStatus !== '' && 'animation: heartBeat 2.5s'}
+    ${popupStatus !== '' && 'animation: heartBeat 2.5s'}
   `;
   return (
     <>
@@ -59,10 +59,10 @@ const FavoriteToogleBtn = ({ cityName }) => {
           <IoMdHeartEmpty css={iconStyle} />
         )}
       </button>
-      {saveStatus === 'saved' && (
+      {popupStatus === 'saved' && (
         <MessagePopup message={`Added to favorites`} icon={<IoCheckmarkCircleOutline />} />
       )}
-      {saveStatus === 'removed' && (
+      {popupStatus === 'removed' && (
         <MessagePopup message={`Removed from favorites`} icon={<IoRemoveCircleOutline />} />
       )}
     </>
