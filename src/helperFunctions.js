@@ -6,4 +6,4 @@ export const formatUnixToDate = (unixTime) => {
   return dateObject;
 };
 
-export const formatTemp = (temp) => temp.toString().split(".")[0] + "°";
+export const formatTemp = (temp) => Math.round(temp) + "°";
