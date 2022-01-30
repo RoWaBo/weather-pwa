@@ -10,7 +10,6 @@ import SmallWeatherInfoItem from "../components/SmallWeatherInfoItem";
 import SimpelHeader from "../components/SimpelHeader";
 import { IoMdHeart } from "react-icons/io";
 
-
 const Favorites = () => {
   const [weather, setWeather] = useState();
   const navigate = useNavigate();
@@ -22,14 +21,13 @@ const Favorites = () => {
     if (favoriteCities.length > 0) {
       const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
 
-      axios
-        .all(
-          favoriteCities.map((cityName) => {
-            return axios.get(
-              `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`
-            );
-          })
-        )
+      Promise.all(
+        favoriteCities.map((cityName) => {
+          return axios.get(
+            `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`
+          );
+        })
+      )
         .then((data) => setWeather(data))
         .catch(() => navigate("/Fallback"));
     }
