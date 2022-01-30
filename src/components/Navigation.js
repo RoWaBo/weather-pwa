@@ -5,21 +5,24 @@ import { IoMdHeart, IoMdSearch } from "react-icons/io";
 import { css } from "@emotion/react";
 
 const Navigation = () => {
-
-  const activeLinkStyleIf = isActive => {
+  const activeLinkStyleIf = (isActive) => {
     const activeLink = {
-      boxShadow: 'inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5)'
-    }
+      boxShadow:
+        "inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5)",
+    };
 
-    return isActive ? activeLink : null
-  }
+    return isActive ? activeLink : null;
+  };
 
   // === STYLING ===
   const navStyle = css`
     position: fixed;
     bottom: 0;
-    width: 100vw;
-    padding: .6rem 2.5rem;
+    left: 50%;
+    transform: translate(-50%);
+    width: 100%;
+    max-width: 500px;
+    padding: 0.6rem 2.5rem;
     background: #fffcfd;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 15px 15px 0 0;
@@ -34,13 +37,13 @@ const Navigation = () => {
     font-size: 1.8rem;
   `;
   const linkStyle = css`
-    padding: .6rem;
+    padding: 0.6rem;
     display: flex;
     transition: 0.25s;
 
     border-radius: 15px;
     box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2),
-    -12px -12px 24px 0 rgba(255, 255, 255, 0.5);
+      -12px -12px 24px 0 rgba(255, 255, 255, 0.5);
 
     & > svg {
       color: #3b3c3a;
@@ -51,17 +54,29 @@ const Navigation = () => {
     <nav css={navStyle}>
       <ul css={listStyle}>
         <li css={itemStyle}>
-          <NavLink to="/favorites" css={linkStyle} style={({ isActive }) => activeLinkStyleIf(isActive)}>
+          <NavLink
+            to="/favorites"
+            css={linkStyle}
+            style={({ isActive }) => activeLinkStyleIf(isActive)}
+          >
             <IoMdHeart />
           </NavLink>
         </li>
         <li css={itemStyle}>
-          <NavLink to="/" css={linkStyle} style={({ isActive }) => activeLinkStyleIf(isActive)}>
+          <NavLink
+            to="/"
+            css={linkStyle}
+            style={({ isActive }) => activeLinkStyleIf(isActive)}
+          >
             <IoLocationSharp />
           </NavLink>
         </li>
         <li css={itemStyle}>
-          <NavLink to="/search" css={linkStyle} style={({ isActive }) => activeLinkStyleIf(isActive)}>
+          <NavLink
+            to="/search"
+            css={linkStyle}
+            style={({ isActive }) => activeLinkStyleIf(isActive)}
+          >
             <IoMdSearch />
           </NavLink>
         </li>
