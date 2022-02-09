@@ -10,7 +10,7 @@ const SmallWeatherInfoItem = ({ title, icon, avgTemp, animationDelay }) => {
     background: rgba(255, 252, 253, 0.5);
     border-radius: 20px;
 
-    animation: fadeInUp 1s 0.${animationDelay}s backwards;
+    /* animation: fadeInUp 1s 0.${animationDelay}s backwards; */
   `;
   const tempStyle = css`
     font-size: 16px;
