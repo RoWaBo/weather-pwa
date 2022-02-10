@@ -37,10 +37,6 @@ const Favorites = () => {
       setSnapToOrigin(true)
       setDeleteBtnIsVisible(false)
     }
-    // console.log(thirdOfViewWidth);
-    // console.log('event: ', e);
-    // console.log('info: ', info);
-    // console.log('position: ', info.offset.x);
   }
   const throttleOnDrag = throttle(onDrag, 200, { leading: false })
   // ===
