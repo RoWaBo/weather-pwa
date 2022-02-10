@@ -46,13 +46,15 @@ const Favorites = () => {
   // ===
 
   const deleteSelectedItem = cityName => {
-    const filteredCities = favoriteCities.filter(favoriteCityName => favoriteCityName !== cityName)
-    setFavoriteCities([...filteredCities])
-    // localStorage.setItem("favoriteCities", JSON.stringify(filteredCities));
+    const filteredWeather = weather.filter(({ data }) => data.name !== cityName)
+    const filteredFavoriteCities = favoriteCities.filter(favoriteCityName => favoriteCityName !== cityName)
+    setWeather([...filteredWeather])
+    setFavoriteCities([...filteredFavoriteCities])
+    localStorage.setItem("favoriteCities", JSON.stringify(filteredFavoriteCities));
   }
 
   useEffect(() => {
-    if (favoriteCities.length > 0) {
+    if (favoriteCities?.length > 0) {
       const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
 
       Promise.all(
@@ -102,66 +104,63 @@ const Favorites = () => {
   return (
     <>
       <SimpelHeader heading="Your favorties" icon={<IoMdHeart />} />
-      {weather && weather.length > 0 && (
-        <motion.ul css={cityListStyle}>
-          <AnimatePresence>
-            {weather.map((city, index) => (
-              <motion.li
-                css={cityListItemStyle}
-                key={city.data.id}
-                initial={{ opacity: 0, y: '50vh' }}
-                animate={{ opacity: 1, y: 1 }}
-                exit={{ x: '200vw', height: 0, margin: 0 }}
-                transition={{ duration: 0.7, delay: `0.${index}`, type: 'spring', stiffness: 50 }}
-                onTapStart={() => SetSelectedItemIndex(index)}
-                drag='x'
-                onDrag={throttleOnDrag}
-                dragSnapToOrigin={snapToOrigin}
-                dragConstraints={{ left: 0, right: thirdOfViewWidth }}
-              >
-                <AnimatePresence>
-                  {deleteBtnIsVisible && index === selectedItemIndex && (
-                    <motion.button
-                      css={deleteBtnStyle}
-                      key={'deleteBtn' + index}
-                      onClick={() => deleteSelectedItem(city.data.name)}
-                      initial={{ opacity: 0, rotate: 40, y: 10 }}
-                      animate={{ opacity: 1, rotate: 0, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 1, type: 'spring', stiffness: 200 }}
-                      whileTap={{ scale: 1.3, rotate: [-20, 20, 0] }}
-                    >
-                      <MdDelete />
-                    </motion.button>
-                  )}
-                </AnimatePresence>
-                <Link to={`/location/${city.data.name}`}>
-                  <SmallWeatherInfoItem
-                    title={city.data.name}
-                    icon={city.data.weather[0].icon}
-                    avgTemp={city.data.main.temp}
-                    animationDelay={index}
-                  />
-                </Link>
-              </motion.li>
-            ))}
-          </AnimatePresence>
-        </motion.ul>
-      )}
-      {!weather && favoriteCities.length > 0 && <LoadingSpinner />}
-      {favoriteCities.length === 0 && (
-        <AnimatePresence exitBeforeEnter>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <CenterContainer>
-              <ImHeartBroken css={errorIconStyle} />
-              <h2 css={errorMessageStyle}>You have no favorites</h2>
-            </CenterContainer>
-          </motion.div>
+      <motion.ul css={cityListStyle}>
+        <AnimatePresence>
+          {weather?.map((city, index) => (
+            <motion.li
+              css={cityListItemStyle}
+              key={city.data.id}
+              initial={{ opacity: 0, y: '50vh' }}
+              animate={{ opacity: 1, y: 1 }}
+              exit={{ x: '200vw', transition: { duration: 0.3 } }}
+              transition={{ duration: 0.7, delay: `0.${index}`, type: 'spring', stiffness: 50 }}
+              layout
+              drag='x'
+              onTapStart={() => SetSelectedItemIndex(index)}
+              onDrag={throttleOnDrag}
+              dragSnapToOrigin={snapToOrigin}
+              dragConstraints={{ left: 0, right: thirdOfViewWidth }}
+            >
+              <AnimatePresence>
+                {deleteBtnIsVisible && index === selectedItemIndex && (
+                  <motion.button
+                    css={deleteBtnStyle}
+                    key={'deleteBtn' + index}
+                    onClick={() => deleteSelectedItem(city.data.name)}
+                    initial={{ opacity: 0, rotate: 40, y: 10 }}
+                    animate={{ opacity: 1, rotate: 0, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1, type: 'spring', stiffness: 200 }}
+                    whileTap={{ scale: 1.3, rotate: [-20, 20, 0] }}
+                  >
+                    <MdDelete />
+                  </motion.button>
+                )}
+              </AnimatePresence>
+              <Link to={`/location/${city.data.name}`}>
+                <SmallWeatherInfoItem
+                  title={city.data.name}
+                  icon={city.data.weather[0].icon}
+                  avgTemp={city.data.main.temp}
+                  animationDelay={index}
+                />
+              </Link>
+            </motion.li>
+          ))}
         </AnimatePresence>
+      </motion.ul>
+      {!weather && favoriteCities.length > 0 && <LoadingSpinner />}
+      {favoriteCities?.length === 0 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <CenterContainer>
+            <ImHeartBroken css={errorIconStyle} />
+            <h2 css={errorMessageStyle}>You have no favorites</h2>
+          </CenterContainer>
+        </motion.div>
       )}
     </>
   );
