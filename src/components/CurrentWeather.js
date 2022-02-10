@@ -18,21 +18,21 @@ const CurrentWeather = ({
   const day = date.toLocaleString("en-US", { weekday: "long" });
   const tempRounded = Math.round(temp);
 
-  // const animationPicker = (icon) => {
-  //   switch (icon) {
-  //     case '01d': return 'rollIn 1s .5s backwards'
-  //     case '01n': return 'rollIn 1s .5s backwards'
-  //     case '09d': return 'shakeY 2s .5s'
-  //     case '09n': return 'shakeY 2s .5s'
-  //     case '10d': return 'headShake 3s .5s'
-  //     case '10n': return 'headShake 3s .5s'
-  //     case '11d': return 'tada 2s .5s'
-  //     case '11n': return 'tada 2s .5s'
-  //     case '13d': return 'rotateIn 1s .5s'
-  //     case '13n': return 'rotateIn 1s .5s'
-  //     default: return 'fadeInRight 1s';
-  //   }
-  // }
+  const animationPicker = (icon) => {
+    switch (icon) {
+      case '01d': return 'rollIn 1s .5s backwards'
+      case '01n': return 'rollIn 1s .5s backwards'
+      case '09d': return 'shakeY 2s .5s'
+      case '09n': return 'shakeY 2s .5s'
+      case '10d': return 'headShake 3s .5s'
+      case '10n': return 'headShake 3s .5s'
+      case '11d': return 'tada 2s .5s'
+      case '11n': return 'tada 2s .5s'
+      case '13d': return 'rotateIn 1s .5s'
+      case '13n': return 'rotateIn 1s .5s'
+      default: return 'fadeInRight 1s';
+    }
+  }
 
   // === STYLING ===
   const containerStyle = css`
@@ -42,6 +42,7 @@ const CurrentWeather = ({
     justify-content: center;
     align-items: center;
     position: relative;
+    overflow: hidden;
 
     animation: fadeIn 1s;
   `;
@@ -93,6 +94,7 @@ const CurrentWeather = ({
           background: rgba(255, 255, 255, .6);
           margin-top: -233px;
           z-index: -1;
+          animation: ${animationPicker(icon)};
         `}
       ></div>
     </div>
