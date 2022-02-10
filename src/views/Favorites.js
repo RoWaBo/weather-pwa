@@ -50,7 +50,7 @@ const Favorites = () => {
   }
 
   useEffect(() => {
-    if (favoriteCities?.length > 0) {
+    if (!weather && favoriteCities?.length > 0) {
       const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
 
       Promise.all(
