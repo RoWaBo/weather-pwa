@@ -92,6 +92,7 @@ const Favorites = () => {
     font-size: 2.5rem;
     /* center on y */
     height: 100%;
+    width: 20%;
     margin: auto 0;
 
     position: absolute;
@@ -110,7 +111,7 @@ const Favorites = () => {
                 key={city.data.id}
                 initial={{ opacity: 0, y: '50vh' }}
                 animate={{ opacity: 1, y: 1 }}
-                exit={{ x: '200vw' }}
+                exit={{ x: '200vw', height: 0, margin: 0 }}
                 transition={{ duration: 0.7, delay: `0.${index}`, type: 'spring', stiffness: 50 }}
                 onTapStart={() => SetSelectedItemIndex(index)}
                 drag='x'
@@ -124,10 +125,11 @@ const Favorites = () => {
                       css={deleteBtnStyle}
                       key={'deleteBtn' + index}
                       onClick={() => deleteSelectedItem(city.data.name)}
-                      initial={{ opacity: 0.5, rotate: 40, x: '-100%' }}
-                      animate={{ opacity: 1, rotate: 0, x: 0 }}
-                      exit={{ opacity: 0.5, x: '-20vw' }}
-                      transition={{ duration: 1, type: 'spring', stiffness: 100 }}
+                      initial={{ opacity: 0, rotate: 40, y: 10 }}
+                      animate={{ opacity: 1, rotate: 0, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 1, type: 'spring', stiffness: 200 }}
+                      whileTap={{ scale: 1.3, rotate: [-20, 20, 0] }}
                     >
                       <MdDelete />
                     </motion.button>
@@ -148,10 +150,18 @@ const Favorites = () => {
       )}
       {!weather && favoriteCities.length > 0 && <LoadingSpinner />}
       {favoriteCities.length === 0 && (
-        <CenterContainer>
-          <ImHeartBroken css={errorIconStyle} />
-          <h2 css={errorMessageStyle}>You have no favorites</h2>
-        </CenterContainer>
+        <AnimatePresence exitBeforeEnter>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <CenterContainer>
+              <ImHeartBroken css={errorIconStyle} />
+              <h2 css={errorMessageStyle}>You have no favorites</h2>
+            </CenterContainer>
+          </motion.div>
+        </AnimatePresence>
       )}
     </>
   );
