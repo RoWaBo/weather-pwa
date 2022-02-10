@@ -7,9 +7,9 @@ const MessagePopup = ({ message, icon }) => {
         padding: 1rem;
         border-radius: 20px;
         position: absolute;
-        bottom: 0;
+        bottom: 15%;
         background: #fffcfd;
-        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+        box-shadow: rgba(17, 12, 46, 0.1) 0px 10px 20px 0px;
         display: flex;
         align-items: center;
 
