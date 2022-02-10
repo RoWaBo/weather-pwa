@@ -43,29 +43,10 @@ const Favorites = () => {
     // console.log('position: ', info.offset.x);
   }
   const throttleOnDrag = throttle(onDrag, 200, { leading: false })
-
-  // === ANIMATION VARIANTS ===
-  const cityListAnimations = {
-    hidden: {
-      opacity: 0,
-      y: '50vh'
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-        staggerChildren: 0.1
-      }
-    },
-    exit: {
-      x: '200vw'
-    }
-  }
   // ===
 
   const deleteSelectedItem = cityName => {
-    const filteredCities = favoriteCities.filter(favoriteCityName => favoriteCityName != cityName)
+    const filteredCities = favoriteCities.filter(favoriteCityName => favoriteCityName !== cityName)
     setFavoriteCities([...filteredCities])
     // localStorage.setItem("favoriteCities", JSON.stringify(filteredCities));
   }
@@ -121,17 +102,16 @@ const Favorites = () => {
     <>
       <SimpelHeader heading="Your favorties" icon={<IoMdHeart />} />
       {weather && weather.length > 0 && (
-        <motion.ul css={cityListStyle}
-          variants={cityListAnimations}
-          initial={'hidden'}
-          animate={'visible'}
-        >
+        <motion.ul css={cityListStyle}>
           <AnimatePresence>
             {weather.map((city, index) => (
-              <motion.li css={cityListItemStyle}
+              <motion.li
+                css={cityListItemStyle}
                 key={city.data.id}
-                variants={cityListAnimations}
-                exit={'exit'}
+                initial={{ opacity: 0, y: '50vh' }}
+                animate={{ opacity: 1, y: 1 }}
+                exit={{ x: '200vw' }}
+                transition={{ duration: 0.7, delay: `0.${index}`, type: 'spring', stiffness: 50 }}
                 onTapStart={() => SetSelectedItemIndex(index)}
                 drag='x'
                 onDrag={throttleOnDrag}
@@ -140,13 +120,14 @@ const Favorites = () => {
               >
                 <AnimatePresence>
                   {deleteBtnIsVisible && index === selectedItemIndex && (
-                    <motion.button css={deleteBtnStyle}
+                    <motion.button
+                      css={deleteBtnStyle}
                       key={'deleteBtn' + index}
                       onClick={() => deleteSelectedItem(city.data.name)}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                      initial={{ opacity: 0.5, rotate: 40, x: '-100%' }}
+                      animate={{ opacity: 1, rotate: 0, x: 0 }}
+                      exit={{ opacity: 0.5, x: '-20vw' }}
+                      transition={{ duration: 1, type: 'spring', stiffness: 100 }}
                     >
                       <MdDelete />
                     </motion.button>
