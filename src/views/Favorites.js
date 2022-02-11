@@ -109,7 +109,7 @@ const Favorites = () => {
               initial={{ opacity: 0, y: '50vh' }}
               animate={{ opacity: 1, y: 1 }}
               exit={{ x: '200vw', transition: { duration: 0.3 } }}
-              transition={{ duration: 0.7, delay: `0.${index}`, type: 'spring', stiffness: 50 }}
+              transition={{ duration: 0.7, delay: `0.${index}`, type: 'spring', stiffness: 300, damping: 24 }}
               layout
               drag='x'
               onTapStart={() => SetSelectedItemIndex(index)}
