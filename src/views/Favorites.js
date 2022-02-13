@@ -76,7 +76,7 @@ const Favorites = () => {
   `;
   const cityListStyle = css`
     overflow: hidden;
-    height: 100vh;
+    height: 100%;
     padding: 1rem;
   `;
   const cityListItemStyle = css`
@@ -107,7 +107,7 @@ const Favorites = () => {
               css={cityListItemStyle}
               key={city.data.id}
               initial={{ opacity: 0, y: '50vh' }}
-              animate={{ opacity: 1, y: 1 }}
+              animate={{ opacity: 1, y: 0 }}
               exit={{ x: '200vw', transition: { duration: 0.3 } }}
               transition={{ duration: 0.7, delay: `0.${index}`, type: 'spring', stiffness: 300, damping: 24 }}
               layout
